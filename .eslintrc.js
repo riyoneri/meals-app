@@ -1,7 +1,7 @@
 // https://docs.expo.dev/guides/using-eslint/
-module.exports = {
-  extends: ["expo", "prettier"],
-  ignorePatterns: ["/dist/*"],
+module.exports =  {
+  extends: ["expo", "prettier", 'plugin:unicorn/recommended'],
+  ignorePatterns: ["/dist/*", ".eslintrc.js"],
   plugins: ["unused-imports"],
   rules: {
     "no-console": "error",
