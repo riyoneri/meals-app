@@ -11,7 +11,7 @@
   },
   "lint-staged": {
     "*.{ts,tsx}": [
-      "expo lint",
+      "eslint --fix",
       "prettier --write"
     ],
     "*.{json,md,js}": "prettier --write"
