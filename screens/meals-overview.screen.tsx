@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from "react-native";
 
-export default function CategoryDetails() {
+export default function MealsOverviewScreen() {
   return (
     <View style={styles.container}>
       <Text>This is Category details</Text>
