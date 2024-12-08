@@ -1,8 +1,8 @@
 class Category {
   constructor(
-    private id: string,
-    private title: string,
-    private color: string,
+    public id: string,
+    public title: string,
+    public color: string,
   ) {}
 }
 
