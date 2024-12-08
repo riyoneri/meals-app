@@ -14,7 +14,6 @@ export default function CategoryGridTile({
   return (
     <View style={styles.gridItem}>
       <Pressable
-        android_ripple={{ color: "#ccc" }}
         style={({ pressed }) => [
           styles.button,
           pressed ? styles.pressedButton : undefined,
