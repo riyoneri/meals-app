@@ -1,9 +1,10 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { useLayoutEffect } from "react";
 import { FlatList, ListRenderItemInfo, StyleSheet, View } from "react-native";
 
 import { RootStackParameterList } from "../app";
 import MealItem from "../components/meal-item";
-import { MEALS } from "../data/dummy-data";
+import { CATEGORIES, MEALS } from "../data/dummy-data";
 import Meal from "../models/meal";
 
 type MealsOverviewScreenProperties = NativeStackScreenProps<
@@ -17,12 +18,21 @@ function renderMealItem(mealData: ListRenderItemInfo<Meal>) {
 
 export default function MealsOverviewScreen({
   route,
+  navigation,
 }: MealsOverviewScreenProperties) {
   const categoryId = route.params.categoryId;
 
   const displayedMeals = MEALS.filter((mealItem) =>
     mealItem.categoryIds.includes(categoryId),
   );
+
+  useLayoutEffect(() => {
+    const categoryTitle = CATEGORIES.find(
+      (category) => categoryId === category.id,
+    )?.title;
+
+    navigation.setOptions({ title: categoryTitle });
+  }, [categoryId, navigation]);
 
   return (
     <View style={styles.container}>
