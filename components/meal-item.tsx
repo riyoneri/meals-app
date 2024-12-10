@@ -1,3 +1,5 @@
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import {
   Image,
   Platform,
@@ -7,18 +9,28 @@ import {
   View,
 } from "react-native";
 
+import { RootStackParameterList } from "../app";
 import Meal from "../models/meal";
 
 export default function MealItem({
+  id,
   title,
   imageUrl,
   duration,
   complexity,
   affordability,
 }: Meal) {
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParameterList>>();
+
+  function selectMealHandler() {
+    navigation.navigate("MealDetails", { mealId: id });
+  }
+
   return (
     <View>
       <Pressable
+        onPress={selectMealHandler}
         style={({ pressed }) => [
           styles.container,
           pressed ? styles.pressedCard : undefined,
