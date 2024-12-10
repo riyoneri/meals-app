@@ -3,11 +3,13 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { StatusBar } from "expo-status-bar";
 
 import CategoriesScreen from "./screens/categories.screen";
+import MealDetailsScreen from "./screens/meal-details.screen";
 import MealsOverviewScreen from "./screens/meals-overview.screen";
 
 export type RootStackParameterList = {
   MealsCategories: undefined;
   MealsOverview: { categoryId: string };
+  MealDetails: { mealId: string };
 };
 
 const Stack = createNativeStackNavigator<RootStackParameterList>();
@@ -33,6 +35,7 @@ export default function App() {
             component={CategoriesScreen}
           />
           <Stack.Screen name="MealsOverview" component={MealsOverviewScreen} />
+          <Stack.Screen name="MealDetails" component={MealDetailsScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </>
