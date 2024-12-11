@@ -11,6 +11,7 @@ import {
 
 import { RootStackParameterList } from "../app";
 import Meal from "../models/meal";
+import MealDetails from "./meal-details";
 
 export default function MealItem({
   id,
@@ -42,11 +43,11 @@ export default function MealItem({
           </View>
           <View style={styles.detailsContainer}>
             <Text style={styles.title}>{title}</Text>
-            <View style={styles.detailsInnerContainer}>
-              <Text>{duration}m</Text>
-              <Text style={styles.textUppercase}>{complexity}</Text>
-              <Text style={styles.textUppercase}>{affordability}</Text>
-            </View>
+            <MealDetails
+              affordability={affordability}
+              complexity={complexity}
+              duration={duration}
+            />
           </View>
         </View>
       </Pressable>
@@ -88,13 +89,5 @@ const styles = StyleSheet.create({
   },
   detailsContainer: {
     gap: 10,
-  },
-  detailsInnerContainer: {
-    flexDirection: "row",
-    justifyContent: "center",
-    gap: 10,
-  },
-  textUppercase: {
-    textTransform: "uppercase",
   },
 });
