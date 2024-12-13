@@ -1,10 +1,10 @@
-import FontAwesome from "@expo/vector-icons/FontAwesome";
+import { Ionicons } from "@expo/vector-icons";
 import { Pressable, StyleSheet } from "react-native";
 
-type FontAwesomeIconNames = keyof typeof FontAwesome.glyphMap;
+type IoniconsIconNames = keyof typeof Ionicons.glyphMap;
 
 interface IconButtonProperties {
-  name: FontAwesomeIconNames;
+  name: IoniconsIconNames;
   color: string;
   onPress: () => void;
 }
@@ -19,7 +19,7 @@ export default function IconButton({
       onPress={onPress}
       style={({ pressed }) => pressed && styles.buttonPressed}
     >
-      <FontAwesome name={name} size={24} color={color} />
+      <Ionicons name={name} size={24} color={color} />
     </Pressable>
   );
 }
