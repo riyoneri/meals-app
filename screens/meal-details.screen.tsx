@@ -1,7 +1,9 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { useLayoutEffect } from "react";
 import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
 
 import { RootStackParameterList } from "../app";
+import IconButton from "../components/icon-button";
 import List from "../components/meal-detail/list";
 import Subtitle from "../components/meal-detail/subtitle";
 import MealDetails from "../components/meal-details";
@@ -14,10 +16,19 @@ type MealsOverviewScreenProperties = NativeStackScreenProps<
 
 export default function MealDetailsScreen({
   route,
+  navigation,
 }: MealsOverviewScreenProperties) {
   const mealId = route.params.mealId;
 
   const selectedMeal = MEALS.find((meal) => meal.id === mealId);
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <IconButton name="star" color="white" onPress={() => {}} />
+      ),
+    });
+  }, [navigation]);
 
   if (!selectedMeal) return <Text>No Meal found</Text>;
 
