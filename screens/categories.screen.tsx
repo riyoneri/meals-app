@@ -1,13 +1,13 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { FlatList, ListRenderItemInfo, View } from "react-native";
 
-import { RootStackParameterList } from "../app";
+import { RootDrawerParameterList, RootStackParameterList } from "../app";
 import CategoryGridTile from "../components/category-grid-tile";
 import { CATEGORIES } from "../data/dummy-data";
 import Category from "../models/category";
 
 type CategoriesScreenProperties = NativeStackScreenProps<
-  RootStackParameterList,
+  RootDrawerParameterList & RootStackParameterList,
   "MealsCategories"
 >;
 
