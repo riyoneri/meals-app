@@ -9,4 +9,6 @@
 
 ---
 
-Enjoy discovering and saving your favorite meals with Meals App!
+<p>Enjoy discovering and saving your favorite meals with Meals App!</p>
+<img src="https://github.com/user-attachments/assets/2470478a-503f-4a1b-adfc-a05302cffa01" alt="All categories image" width="200">
+<img src="https://github.com/user-attachments/assets/c274bcb8-f365-4cac-bc62-d8f2217c3b01" alt="Single category image" width="200">
