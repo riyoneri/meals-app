@@ -9,9 +9,9 @@ import {
   View,
 } from "react-native";
 
-import { RootStackParameterList } from "../app";
-import Meal from "../models/meal";
-import MealDetails from "./meal-details";
+import { RootStackParameterList } from "../../app";
+import Meal from "../../models/meal";
+import MealDetails from "../meal-details";
 
 export default function MealItem({
   id,
