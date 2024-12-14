@@ -1,5 +1,5 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { useLayoutEffect } from "react";
+import { useContext, useLayoutEffect } from "react";
 import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
 
 import { RootStackParameterList } from "../app";
@@ -8,6 +8,7 @@ import List from "../components/meal-detail/list";
 import Subtitle from "../components/meal-detail/subtitle";
 import MealDetails from "../components/meal-details";
 import { MEALS } from "../data/dummy-data";
+import { FavoritesContext } from "../store/context/favorites-context";
 
 type MealsOverviewScreenProperties = NativeStackScreenProps<
   RootStackParameterList,
@@ -19,16 +20,29 @@ export default function MealDetailsScreen({
   navigation,
 }: MealsOverviewScreenProperties) {
   const mealId = route.params.mealId;
+  const favoritesContext = useContext(FavoritesContext);
 
   const selectedMeal = MEALS.find((meal) => meal.id === mealId);
 
+  const mealIsFavorite = favoritesContext.ids.includes(selectedMeal?.id ?? "");
+
   useLayoutEffect(() => {
+    function changeMealFavoriteHandler() {
+      if (mealIsFavorite)
+        favoritesContext.removeFavorite(selectedMeal?.id ?? "");
+      else favoritesContext.addFavorite(selectedMeal?.id ?? "");
+    }
+
     navigation.setOptions({
       headerRight: () => (
-        <IconButton name="star" color="white" onPress={() => {}} />
+        <IconButton
+          name={mealIsFavorite ? "star" : "star-outline"}
+          color="white"
+          onPress={changeMealFavoriteHandler}
+        />
       ),
     });
-  }, [navigation]);
+  }, [favoritesContext, mealIsFavorite, navigation, selectedMeal?.id]);
 
   if (!selectedMeal) return <Text>No Meal found</Text>;
 
