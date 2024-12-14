@@ -1,5 +1,5 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { useContext, useLayoutEffect } from "react";
+import { useLayoutEffect } from "react";
 import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
 
 import { RootStackParameterList } from "../app";
@@ -8,7 +8,8 @@ import List from "../components/meal-detail/list";
 import Subtitle from "../components/meal-detail/subtitle";
 import MealDetails from "../components/meal-details";
 import { MEALS } from "../data/dummy-data";
-import { FavoritesContext } from "../store/context/favorites-context";
+import { useAppDispatch, useAppSelector } from "../hooks/store-hooks";
+import { favoriteActions } from "../store/redux/favorites-slice";
 
 type MealsOverviewScreenProperties = NativeStackScreenProps<
   RootStackParameterList,
@@ -20,17 +21,24 @@ export default function MealDetailsScreen({
   navigation,
 }: MealsOverviewScreenProperties) {
   const mealId = route.params.mealId;
-  const favoritesContext = useContext(FavoritesContext);
+  // const favoritesContext = useContext(FavoritesContext);
+  const favorites = useAppSelector((state) => state.favoriteMeals);
+  const dispatch = useAppDispatch();
 
   const selectedMeal = MEALS.find((meal) => meal.id === mealId);
 
-  const mealIsFavorite = favoritesContext.ids.includes(selectedMeal?.id ?? "");
+  const mealIsFavorite = favorites.ids.includes(selectedMeal?.id ?? "");
 
   useLayoutEffect(() => {
     function changeMealFavoriteHandler() {
       if (mealIsFavorite)
-        favoritesContext.removeFavorite(selectedMeal?.id ?? "");
-      else favoritesContext.addFavorite(selectedMeal?.id ?? "");
+        // favoritesContext.removeFavorite(selectedMeal?.id ?? "");
+        dispatch(
+          favoriteActions.removeFavorite({ id: selectedMeal?.id ?? "" }),
+        );
+      else
+        // favoritesContext.addFavorite(selectedMeal?.id ?? "");
+        dispatch(favoriteActions.addFavorite({ id: selectedMeal?.id ?? "" }));
     }
 
     navigation.setOptions({
@@ -42,7 +50,7 @@ export default function MealDetailsScreen({
         />
       ),
     });
-  }, [favoritesContext, mealIsFavorite, navigation, selectedMeal?.id]);
+  }, [dispatch, mealIsFavorite, navigation, selectedMeal?.id]);
 
   if (!selectedMeal) return <Text>No Meal found</Text>;
 
