@@ -1,31 +1,28 @@
-import { PropsWithChildren, useState } from "react";
+import { PropsWithChildren } from "react";
+import { Provider } from "react-redux";
 
-import { FavoritesContext } from "./store/context/favorites-context";
+import { store } from "./store/redux/store";
 
 export default function Providers({ children }: PropsWithChildren) {
-  const [favoriteIds, setFavoriteIds] = useState<string[]>([]);
+  // const [favoriteIds, setFavoriteIds] = useState<string[]>([]);
 
-  const addFavorite = (id: string) => {
-    setFavoriteIds((previousFavoriteIds) => [...previousFavoriteIds, id]);
-  };
+  // const addFavorite = (id: string) => {
+  //   setFavoriteIds((previousFavoriteIds) => [...previousFavoriteIds, id]);
+  // };
 
-  const removeFavorite = (id: string) => {
-    setFavoriteIds((previousFavoriteIds) =>
-      previousFavoriteIds.filter(
-        (previousFavoriteId) => previousFavoriteId !== id,
-      ),
-    );
-  };
+  // const removeFavorite = (id: string) => {
+  //   setFavoriteIds((previousFavoriteIds) =>
+  //     previousFavoriteIds.filter(
+  //       (previousFavoriteId) => previousFavoriteId !== id,
+  //     ),
+  //   );
+  // };
 
-  const values = {
-    ids: favoriteIds,
-    addFavorite,
-    removeFavorite,
-  };
+  // const values = {
+  //   ids: favoriteIds,
+  //   addFavorite,
+  //   removeFavorite,
+  // };
 
-  return (
-    <FavoritesContext.Provider value={values}>
-      {children}
-    </FavoritesContext.Provider>
-  );
+  return <Provider store={store}>{children}</Provider>;
 }
